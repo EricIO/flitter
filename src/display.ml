@@ -24,11 +24,13 @@ let join_pad width left right =
 
 let preamble timer width =
   let center = center_pad width in
+  let left = left_pad width in
   let bold_color = A.(Colors.text ++ st bold) in
   let title = I.string bold_color timer.title |> center in
   let category = I.string bold_color timer.category |> center in
+  let attempts = I.string bold_color ("Attempts: " ^ (string_of_int timer.attempts)) |>  left in
 
-  I.(title <-> category)
+  I.(title <-> category <-> attempts)
 
 let splits_header timer width =
   let labels = match timer.wr with
